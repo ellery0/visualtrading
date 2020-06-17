@@ -4,9 +4,7 @@
 
 `embedding.py`: train auto-encoder  
 
-`train.py`: vgg, resnets
-
-`convlstm.py`: convLSTM  
+`train.py`: vgg, resnets  
 
 `vgglstm.py`: vgg+LSTM
 
