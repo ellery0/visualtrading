@@ -1,20 +1,20 @@
 # draw graphs
 # candle stick
 
-import talib
+#import talib
 #from talib import CDL2CROWS
 import numpy as np
 import pandas as pd
-import matplotlib
+#import matplotlib
 
 from pandas_datareader import data as pdr
 import mpl_finance
-from mpl_finance import candlestick_ohlc
-from mpl_finance import candlestick2_ochl
+#from mpl_finance import candlestick_ohlc
+#from mpl_finance import candlestick2_ochl
 
 from datetime import datetime, timedelta
-import matplotlib.dates as mdates
-from matplotlib.pyplot import subplots, draw
+#import matplotlib.dates as mdates
+#from matplotlib.pyplot import subplots, draw
 import matplotlib.pyplot as plt
 from matplotlib import ticker
 
@@ -90,28 +90,28 @@ for i in range(day_num-1):
     label[i] = (np.sign(data['Close'][i+1]-data['Close'][i])+1)/2
     # #print(CDL2CROWS(data['Open'],data['High'],data['Low'],data['Close']))
 
-    # mpl_finance.candlestick_ochl(
-    #     ax=ax1,
-    #     quotes=data[['dates', 'Open', 'Close', 'High', 'Low']][i:i+window].values,
-    #     width=0.7,
-    #     colorup='r',
-    #     colordown='g',
-    #     alpha=0.7)
-    # for j in range(len(colors)):
-    #     # plt.plot(data['dates'][i:i+window], data[ma][i:i+window])
-    #     ax1.plot(data['dates'][i:i+window], data[mas[j]][i:i+window],linewidth=5,color=colors[j])
-    # #plt.axis('off')
-    # ax1.axis('off')
-    #
-    # ax2.xaxis.set_major_formatter(ticker.FuncFormatter(format_date))
-    # ax2.bar(data[i:i+window].query('up == 1')['dates'], data[i:i+window].query('up == 1')['Volume'], color='r', alpha=0.7)
-    # ax2.bar(data[i:i+window].query('up == 0')['dates'], data[i:i+window].query('up == 0')['Volume'], color='g', alpha=0.7)
-    # ax2.axis('off')
-    #
-    # if i<day_num*p:
-    #     plt.savefig('train-pic-ma/traincandle_%s'%i)
-    # else:
-    #     plt.savefig('test-pic-ma/testcandle_%s'%i)
+    mpl_finance.candlestick_ochl(
+         ax=ax1,
+         quotes=data[['dates', 'Open', 'Close', 'High', 'Low']][i:i+window].values,
+         width=0.7,
+         colorup='r',
+         colordown='g',
+         alpha=0.7)
+    for j in range(len(colors)):
+         # plt.plot(data['dates'][i:i+window], data[ma][i:i+window])
+         ax1.plot(data['dates'][i:i+window], data[mas[j]][i:i+window],linewidth=5,color=colors[j])
+     #plt.axis('off')
+    ax1.axis('off')
+    
+    ax2.xaxis.set_major_formatter(ticker.FuncFormatter(format_date))
+    ax2.bar(data[i:i+window].query('up == 1')['dates'], data[i:i+window].query('up == 1')['Volume'], color='r', alpha=0.7)
+    ax2.bar(data[i:i+window].query('up == 0')['dates'], data[i:i+window].query('up == 0')['Volume'], color='g', alpha=0.7)
+    ax2.axis('off')
+    
+    if i<day_num*p:
+        plt.savefig('train-pic-ma/traincandle_%s'%i)
+    else:
+        plt.savefig('test-pic-ma/testcandle_%s'%i)
 
 label = pd.DataFrame(label)
 pd.DataFrame.to_csv(label,'label-ma.txt',header=False,index=False)
